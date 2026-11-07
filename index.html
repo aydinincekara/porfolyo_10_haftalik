@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yapay Zeka ve Yazılım Uzmanlığı Portfolyosu</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #00f2fe;
+            --secondary: #4facfe;
+            --bg-color: #0b0f19;
+            --surface: rgba(25, 33, 50, 0.7);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(79, 172, 254, 0.15), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(0, 242, 254, 0.15), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        /* Header / Hero Section */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4rem 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            animation: slideUp 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .instructor-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(0, 242, 254, 0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 242, 254, 0.2);
+        }
+
+        .instructor-badge i {
+            color: var(--primary);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            padding: 5rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        /* Ortadaki Nokta */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--primary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background: var(--surface);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(5px);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.2);
+            border-color: rgba(0, 242, 254, 0.3);
+        }
+
+        .timeline-content h2 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .date {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            background: rgba(255,255,255,0.05);
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+
+        .timeline-content ul {
+            list-style-type: none;
+        }
+
+        .timeline-content ul li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .timeline-content ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        /* Gallery / Modules Section */
+        .gallery-section {
+            padding: 5rem 2rem;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-card {
+            background: var(--surface);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.3s;
+        }
+
+        .gallery-card:hover {
+            transform: scale(1.02);
+            border-color: var(--secondary);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            background-color: #1e293b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 2rem;
+            object-fit: cover;
+        }
+
+        .gallery-info {
+            padding: 20px;
+        }
+
+        .gallery-info h3 {
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .gallery-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobil Uyumluluk */
+        @media screen and (max-width: 768px) {
+            header h1 { font-size: 2.5rem; }
+            .timeline::before { left: 31px; }
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .timeline-item:nth-child(even) { left: 0; }
+            .timeline-item::after, .timeline-item:nth-child(even):after {
+                left: 21px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="hero-content">
+            <h1>Yazılım & Yapay Zeka Uzmanlığı</h1>
+            <p>10 Haftalık Eğitim Serüveni Portfolyosu</p>
+            <div class="instructor-badge">
+                <i class="fa-solid fa-chalkboard-user"></i>
+                <span>Aydın İNCEKARA | Teknoloji Eğitmeni</span>
+            </div>
+            <div class="instructor-badge" style="margin-top: 10px;">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <span>Çocuk Üniversitesi</span>
+            </div>
+        </div>
+        <!-- Scroll indicator -->
+        <div style="position: absolute; bottom: 40px; animation: bounce 2s infinite;">
+            <i class="fa-solid fa-chevron-down" style="font-size: 2rem; color: var(--primary);"></i>
+        </div>
+    </header>
+
+    <section class="gallery-section">
+        <h2 class="section-title">Projeler & Sistemler</h2>
+        <div class="gallery-grid">
+            <!-- Pıtır Görseli İçin Kart -->
+            <div class="gallery-card">
+                <!-- NOT: "pitir-ekran.png" kısmına kendi dosya adınızı yazın. Görsel yoksa ikon görünür. -->
+                <img src="pitir.jpg" alt="Pıtır Yapay Zeka Modeli" class="gallery-image" onerror="this.outerHTML='<div class=\'gallery-image\'><i class=\'fa-solid fa-robot\'></i></div>'">
+                <div class="gallery-info">
+                    <h3>Pıtır - Neşeli Baykuş Öğretmen</h3>
+                    <p>3. Haftada incelenen, donanım bileşenleri (direnç, LED bağlantıları vb.) hakkında sesli etkileşim kurabilen yerel yapay zeka asistanı modelimiz.</p>
+                </div>
+            </div>
+            
+            <div class="gallery-card">
+                <div class="gallery-image"><i class="fa-solid fa-gamepad"></i></div>
+                <div class="gallery-info">
+                    <h3>Super Mario Projesi</h3>
+                    <p>Algoritma mantığını kavramak için geliştirdiğimiz ilk oyun programlama deneyimimiz.</p>
+                </div>
+            </div>
+
+            <div class="gallery-card">
+                <div class="gallery-image"><i class="fa-solid fa-network-wired"></i></div>
+                <div class="gallery-info">
+                    <h3>AFİ ve Bilge Sistemleri</h3>
+                    <p>Siber güvenlik, PİNG sistemleri ve donanım görevlerinin kod yardımıyla çözüldüğü modüller.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section">
+        <h2 class="section-title">Ders Akışı</h2>
+        <div class="timeline">
+            
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h2>1. Ders <span class="date">26.09</span></h2>
+                    <ul>
+                        <li>Tanışma ve müfredata giriş</li>
+                        <li>Mario projesi öncesi örneklerin incelenmesi</li>
+                        <li>Mario projesinin yapımı ve projelerin yorumlanması</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h2>2. Ders <span class="date">03.10</span></h2>
+                    <ul>
+                        <li>Geliştirilen projelerin kod incelemesi</li>
+                        <li>Sınıfın iki gruba ayrılması</li>
+                        <li>"Neyin yapay zeka olup olmadığı" üzerine tartışma</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h2>3. Ders <span class="date">10.10</span></h2>
+                    <ul>
+                        <li>Güncel YZ bilgileri ve <strong>Pıtır</strong> modelinin incelenmesi</li>
+                        <li>Yapay zeka modellerinin özellik analizi</li>
+                        <li>REM (RAM) gibi temel donanım kavramları</li>
+                        <li>Portfolyo notları ve Gmail kurulumları</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h2>4. Ders <span class="date">17.10</span></h2>
+                    <ul>
+                        <li>Doğal afet sebebiyle ders yapılamamıştır</li>
+                        <li><em>Telafi ve serbest proje düşünme haftası</em></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h2>5. Ders <span class="date">25.10</span></h2>
+                    <ul>
+                        <li><strong>AFİ Sistemi:</strong> Görevlerin kod yardımıyla çözümü</li>
+                        <li>PİNG sistemi ve Siber Güvenlik temelleri</li>
+                        <li><strong>Kumru:</strong> Asistan sistemiyle denemeler</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h2>6. Ders <span class="date">01.11</span></h2>
+                    <ul>
+                        <li><strong>HTML'e Giriş:</strong> Kod yazarak özgeçmiş oluşturma</li>
+                        <li>Bilge yapay zeka sisteminin incelenmesi</li>
+                        <li>Live Server eklentisi ve dosya uzantıları (.txt vb.)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h2>7. Ders <span class="date">Planlanan</span></h2>
+                    <ul>
+                        <li><strong>CSS Temelleri:</strong> Özgeçmişi renklendirme</li>
+                        <li>Sayfa düzeni ve tasarım geliştirme</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h2>8. Ders <span class="date">Planlanan</span></h2>
+                    <ul>
+                        <li><strong>GitHub'a Giriş:</strong> Bulut depolama mantığı</li>
+                        <li>Yazılan kodların versiyon kontrol sistemine yüklenmesi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h2>9. Ders <span class="date">Planlanan</span></h2>
+                    <ul>
+                        <li><strong>GitHub Pages:</strong> Canlı web yayını</li>
+                        <li>Öğrenci portfolyolarının internet sitesine dönüştürülmesi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h2>10. Ders <span class="date">Planlanan</span></h2>
+                    <ul>
+                        <li>QR Kod Entegrasyonu</li>
+                        <li>Projelerin mobil testleri</li>
+                        <li>Veli sunumu ve dönem sonu değerlendirmesi</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Çocuk Üniversitesi | Teknoloji Eğitmeni Aydın İNCEKARA tarafından hazırlanmıştır.</p>
+    </footer>
+
+    <!-- Scroll Animasyonu İçin JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.timeline-item').forEach((item) => {
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
